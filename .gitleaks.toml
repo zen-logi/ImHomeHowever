@@ -1,0 +1,78 @@
+# Gitleaks configuration for ImHomeHowever project
+# This configuration checks for AWS, Discord, and other sensitive tokens
+
+title = "ImHomeHowever Security Configuration"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "discord-bot-token"
+description = "Discord Bot Token"
+regex = '''(?i)(discord[_-]?token|bot[_-]?token)['"]?\s*[:=]\s*['"]?([A-Za-z0-9_-]{24}\.[A-Za-z0-9_-]{6}\.[A-Za-z0-9_-]{27})'''
+tags = ["discord", "token"]
+
+[[rules]]
+id = "discord-webhook"
+description = "Discord Webhook URL"
+regex = '''https://discord(?:app)?\.com/api/webhooks/\d+/[A-Za-z0-9_-]+'''
+tags = ["discord", "webhook"]
+
+[[rules]]
+id = "discord-client-id"
+description = "Discord Client ID"
+regex = '''(?i)(client[_-]?id|application[_-]?id)['"]?\s*[:=]\s*['"]?(\d{17,19})'''
+tags = ["discord", "client-id"]
+
+[[rules]]
+id = "aws-access-key"
+description = "AWS Access Key ID"
+regex = '''(?i)aws[_-]?access[_-]?key[_-]?id['"]?\s*[:=]\s*['"]?(AKIA[0-9A-Z]{16})'''
+tags = ["aws", "access-key"]
+
+[[rules]]
+id = "aws-secret-key"
+description = "AWS Secret Access Key"
+regex = '''(?i)aws[_-]?secret[_-]?access[_-]?key['"]?\s*[:=]\s*['"]?([A-Za-z0-9/+=]{40})'''
+tags = ["aws", "secret-key"]
+
+[[rules]]
+id = "aws-account-id"
+description = "AWS Account ID"
+regex = '''(?i)aws[_-]?account[_-]?id['"]?\s*[:=]\s*['"]?(\d{12})'''
+tags = ["aws", "account-id"]
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(api[_-]?key|apikey)['"]?\s*[:=]\s*['"]?([A-Za-z0-9_-]{20,})'''
+tags = ["api-key", "generic"]
+
+[[rules]]
+id = "private-key"
+description = "Private Key"
+regex = '''-----BEGIN (RSA|DSA|EC|OPENSSH) PRIVATE KEY-----'''
+tags = ["private-key"]
+
+[allowlist]
+description = "Global allowlist"
+paths = [
+    '''\.md$''',
+    '''\.txt$''',
+    '''\.example$''',
+    '''\.sample$''',
+    '''\.template$''',
+    '''gradlew''',
+    '''gradlew.bat''',
+]
+
+# Allow environment variable references (not actual secrets)
+regexes = [
+    '''System\.getenv\(''',
+    '''process\.env\.''',
+    '''config\.propertyOrNull\(''',
+    '''DISCORD_TOKEN not found''',
+    '''PUBLIC_KEY not found''',
+    '''CHANNEL_ID not found''',
+    '''QUEUE_URL not found''',
+]
