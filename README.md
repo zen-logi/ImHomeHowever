@@ -84,6 +84,27 @@ aws lambda update-function-code --function-name ImHomeWorker --image-uri <IMAGE_
 3. **Interactions Endpoint URL** に `https://<LAMBDA_FUNCTION_URL>/api/discord/webhook` を設定
 4. `applications.commands` スコープでサーバーに Bot を追加
 
+## セキュリティ
+
+### 自動セキュリティスキャン
+
+このリポジトリでは、機密情報（AWS キー、Discord トークンなど）の漏洩を防ぐため、以下の自動スキャンを実施しています：
+
+- **Gitleaks**: シークレットスキャンツール
+- **TruffleHog**: 検証済みシークレット検出ツール
+
+スキャンは以下のタイミングで実行されます：
+- プッシュ時（main/master/develop ブランチ）
+- プルリクエスト作成時
+- 毎日 9:00 JST（定期スキャン）
+- 手動実行（GitHub Actions の workflow_dispatch）
+
+### セキュリティのベストプラクティス
+
+1. **環境変数を使用**: トークンやキーは必ず環境変数で管理
+2. **`.gitignore` の活用**: `.env` ファイルや秘密鍵はコミット禁止
+3. **定期的な監視**: GitHub Actions のスキャン結果を定期的に確認
+
 ## ライセンス
 
 MIT
