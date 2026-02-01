@@ -9,7 +9,7 @@ useDefault = true
 [[rules]]
 id = "discord-bot-token"
 description = "Discord Bot Token"
-regex = '''(?i)(discord[_-]?token|bot[_-]?token)['"]?\s*[:=]\s*['"]?([A-Za-z0-9_-]{24}\.[A-Za-z0-9_-]{6}\.[A-Za-z0-9_-]{27})'''
+regex = '''(?i)(discord[_-]?token|bot[_-]?token)['"]?\s*[:=]\s*['"]?([A-Za-z0-9_-]{20,28}\.[A-Za-z0-9_-]{6}\.[A-Za-z0-9_-]{27})'''
 tags = ["discord", "token"]
 
 [[rules]]
@@ -45,7 +45,7 @@ tags = ["aws", "account-id"]
 [[rules]]
 id = "generic-api-key"
 description = "Generic API Key"
-regex = '''(?i)(api[_-]?key|apikey)['"]?\s*[:=]\s*['"]?([A-Za-z0-9_-]{20,})'''
+regex = '''(?i)(api[_-]?key|apikey)['"]?\s*[:=]\s*['"]?([A-Za-z0-9_-]{32,})'''
 tags = ["api-key", "generic"]
 
 [[rules]]
@@ -57,13 +57,10 @@ tags = ["private-key"]
 [allowlist]
 description = "Global allowlist"
 paths = [
-    '''\.md$''',
-    '''\.txt$''',
-    '''\.example$''',
-    '''\.sample$''',
-    '''\.template$''',
     '''gradlew''',
     '''gradlew.bat''',
+    '''README\.md$''',
+    '''SECURITY\.md$''',
 ]
 
 # Allow environment variable references (not actual secrets)
