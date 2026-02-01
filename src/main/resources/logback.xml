@@ -1,0 +1,28 @@
+<configuration>
+    <!-- コンソール出力（Lambda CloudWatch Logs 用） -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- アプリケーションのログレベル -->
+    <logger name="net.bbldvw.imhomehowever" level="${LOG_LEVEL:-DEBUG}" />
+    
+    <!-- Ktor のログレベル -->
+    <logger name="io.ktor" level="INFO" />
+    
+    <!-- Netty のログレベル（冗長なので WARN に） -->
+    <logger name="io.netty" level="WARN" />
+    
+    <!-- AWS SDK のログレベル -->
+    <logger name="software.amazon.awssdk" level="INFO" />
+    
+    <!-- JDA のログレベル -->
+    <logger name="net.dv8tion" level="INFO" />
+
+    <!-- ルートレベル -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
