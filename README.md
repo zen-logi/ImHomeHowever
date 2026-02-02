@@ -8,6 +8,11 @@
 - Yahoo 路線情報からスクレイピングで取得
 - AWS Lambda + SQS でサーバーレス運用
 
+### スクリーンショット
+
+![基本コマンド](assets/command_basic.png)
+![経由駅指定](assets/command_via.png)
+
 ## アーキテクチャ
 
 ```
