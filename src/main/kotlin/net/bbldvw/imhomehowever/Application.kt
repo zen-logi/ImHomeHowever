@@ -13,6 +13,7 @@ import io.ktor.server.routing.*
 import net.bbldvw.imhomehowever.config.appModule
 import net.bbldvw.imhomehowever.controllers.DiscordWebhookController
 import net.bbldvw.imhomehowever.controllers.SqsWorkerController
+import net.dv8tion.jda.api.JDA
 import org.koin.dsl.module
 import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
@@ -47,6 +48,10 @@ fun Application.module() {
         modules(appModule, configModule)
     }
     log.debug("Koin installed")
+
+    // JDA を初期化（スラッシュコマンド登録のため）
+    val jda by inject<JDA>()
+    log.info("JDA initialized: ${jda.selfUser?.name ?: "starting..."}")
 
     // ログ出力設定
     install(CallLogging)

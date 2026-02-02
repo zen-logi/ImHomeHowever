@@ -50,7 +50,7 @@ val appModule =
                         jda.awaitReady()
                         val guild = jda.getGuildById(guildId)
                         if (guild != null) {
-                            guild.upsertCommand(
+                            guild.updateCommands().addCommands(
                                 net.dv8tion.jda.api.interactions.commands.build.Commands.slash("imhome", "帰宅経路を検索します")
                                     .addOptions(
                                         net.dv8tion.jda.api.interactions.commands.build.OptionData(
