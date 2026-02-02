@@ -6,7 +6,7 @@
 
 - `/imhome from:[出発駅] to:[到着駅] via:[経由駅]` コマンドで経路検索
 - Yahoo 路線情報からスクレイピングで取得
-- AWS Lambda + SQS でサーバーレス運用（完全無料）
+- AWS Lambda + SQS でサーバーレス運用
 
 ## アーキテクチャ
 

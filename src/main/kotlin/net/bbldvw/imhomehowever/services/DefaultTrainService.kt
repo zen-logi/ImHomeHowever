@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets
 
 class DefaultTrainService : TrainService {
     private val log = LoggerFactory.getLogger(DefaultTrainService::class.java)
+
     // Yahoo路線情報のURL
     private val baseUrl = "https://transit.yahoo.co.jp/search/result"
 
